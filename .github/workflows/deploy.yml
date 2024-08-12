@@ -3,7 +3,10 @@ name: Deploy Vite App to GitHub Pages
 on:
   push:
     branches:
-      - main # Change this to your main branch name if different
+      - main
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -16,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "20" # You can specify your preferred Node.js version
+          node-version: "20"
 
       - name: Install dependencies
         run: npm install
@@ -26,8 +29,6 @@ jobs:
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
-        permissions:
-          contents: write
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
